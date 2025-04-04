@@ -1,4 +1,5 @@
 import os
+import uuid
 
 from django.db import models
 from rest_framework.exceptions import ValidationError
@@ -9,9 +10,8 @@ from teachers.models import Teacher
 # Create your models here.
 
 class Year(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     year = models.CharField(max_length=9)
-
-    teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'year'
@@ -23,8 +23,8 @@ class Year(models.Model):
 
 
 class Category(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     category_name = models.CharField(max_length=100)
-    teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='teacher_category')
 
     class Meta:
         db_table = 'category'
@@ -36,12 +36,13 @@ class Category(models.Model):
 
 
 class Documents(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     document_name = models.CharField(max_length=254)
     document_description = models.TextField(null=True, blank=True)
     document = models.FileField(upload_to='documents')
-    teacher_id = models.ForeignKey(Teacher, on_delete=models.CASCADE, related_name='teacher_document')
-    document_year = models.ForeignKey(Year, on_delete=models.CASCADE, related_name='document_year')
-    category_id = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category_document')
+    teacher_id = models.ForeignKey(Teacher, on_delete=models.PROTECT, related_name='teacher_document')
+    document_year = models.ForeignKey(Year, on_delete=models.PROTECT, related_name='document_year')
+    category_id = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='category_document')
     visible = models.BooleanField(default=False)
 
     class Meta:
