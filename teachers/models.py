@@ -23,8 +23,8 @@ class PositionTeacher(models.Model):
 # Create your models here.
 class Teacher(AbstractBaseUser):
     class ROLE(models.TextChoices):
-        ADMIN = 'admin', 'Администратор'
-        TEACHER = 'teacher', 'Учитель'
+        ADMIN = 'admin',
+        TEACHER = 'teacher',
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     full_name = models.CharField(max_length=100)
