@@ -31,7 +31,7 @@ class Teacher(AbstractBaseUser):
     username = models.CharField(max_length=100, unique=True)
     password = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=13, unique=True)
-    logo_teacher = models.ImageField(upload_to='teachers/')
+    logo_teacher = models.ImageField(upload_to='teachers/', null=True, blank=True)
     position_id = models.ForeignKey(PositionTeacher, on_delete=models.CASCADE, related_name='position_teacher')
     role = models.CharField(max_length=10, choices=ROLE.choices, default=ROLE.TEACHER)
 
