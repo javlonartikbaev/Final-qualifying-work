@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['di-nmtu.social', 'localhost', '127.0.0.1', '8426-213-230-92-224.ngrok-free.app']
 AUTH_USER_MODEL = 'teachers.Teacher'
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_HEADERS = [
@@ -67,6 +67,8 @@ INSTALLED_APPS = [
     'teachers',
     'corsheaders',
     'drf_yasg',
+    'about',
+    'news'
 
 ]
 
@@ -108,11 +110,11 @@ WSGI_APPLICATION = 'DiplomnayaRabota.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv("DB_NAME"),
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASSWORD"),
-        'HOST': os.getenv("DB_HOST"),
-        'PORT': os.getenv("DB_PORT"),
+        'NAME': 'final_work',  # os.getenv("DB_NAME"),
+        'USER': 'postgres',  # os.getenv("DB_USER"),
+        'PASSWORD': 'qwerty123',  # os.getenv("DB_PASSWORD"),
+        'HOST': 'localhost',  # os.getenv("DB_HOST"),
+        'PORT': '5432',  # os.getenv("DB_PORT"),
 
     }
 }
